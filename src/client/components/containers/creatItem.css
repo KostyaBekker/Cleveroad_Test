@@ -1,0 +1,35 @@
+.form__wrap__creatItem {
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.creatItem__form {
+  width: 50%;
+}
+.creatItem__button__block {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+.validCreat {
+  color: red;
+  display: none;
+  width: 50%;
+  margin: 0 0 5px 6px;
+}
+.isValidCreat {
+  color: red;
+  display: block;
+  width: 50%;
+  margin: 0 0 5px 6px;
+}
+.creatItem__form__blockPrice {
+  margin-left: -11px;
+  width: 50%;
+}
+.creatItem__form__price {
+  width: 100%;
+}
+  

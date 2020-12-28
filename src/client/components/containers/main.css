@@ -1,0 +1,59 @@
+.main__header {
+  border: 1px solid #5e5e5e;
+  width: 100%;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+.main__header button {
+  margin: 2px;
+}
+.select {
+  width: 200px;
+}
+.select__block {
+  padding: 10px;
+}
+.logo__block {
+  width: 200px;
+  padding: 10px;
+}
+.select__block___222 {
+  top: 20px !important;
+}
+.MuiFormControl-root {
+  margin: 5px !important;
+}
+.main__content {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 5%;
+}
+.main__content__elem {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  margin: 20px;
+  border: 1px solid rgb(128, 128, 128);
+  border-radius: 5px;
+  padding: 10px;
+}
+.main__content__item {
+  display: flex;
+  flex-direction: column;
+}
+.main__content__item h1 {
+  margin: 3px;
+  font-size: 22px;
+  width: 100px;
+}
+.main__content__item span {
+  width: 100px;
+}
+.main__content__item__buttonBlock {
+  display: flex;
+  justify-content: space-between;
+}
+.main__content__item__buttonBlock span {
+  width: 100%;
+}

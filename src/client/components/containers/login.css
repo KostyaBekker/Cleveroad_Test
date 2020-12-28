@@ -1,0 +1,13 @@
+.form__wrap__login {
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.form__wrap__login button{
+  margin: 24px 25%;
+}
+.failInput {
+  color: red;
+  margin-left: 6px;
+}
