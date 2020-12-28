@@ -19,9 +19,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/"><Login /></Route>
             <Route exact path="/main__app"><MainApp /></Route>
-            <Route exact path="/creat__item">
-              <CreatItem />
-            </Route>
+            <Route exact path="/creat__item"><CreatItem /></Route>
           </Switch>
         </div>
       </Router>

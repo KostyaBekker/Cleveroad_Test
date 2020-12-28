@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,8 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 
-import { addItem } from '../../redux/actionsCreatItem';
-import { editItem } from '../../redux/actionsCreatItem';
+import { addItem, editItem } from '../../redux/actionsCreatItem';
 
 import './creatItem.css';
 
@@ -28,19 +27,16 @@ class CreatItem extends Component {
       percentDiscount: this.props.creatElem.percentDiscount,
       endDateDiscount: this.props.creatElem.endDateDiscount,
       showFailDiscount: false,
-      currentDate: new Date().toJSON().slice(0,10).replace(/-/g,'-'),
+      currentDate: new Date().toJSON().slice(0, 10).replace(/-/g, '-'),
     };
   }
 
   hendelChangeSelect = (key, value) => {
-    console.log(key, value);
     this.setState({ [key]: value });
     this.setState({ showFailHeader: false });
     this.setState({ showFailAboutItem: false });
     this.setState({ showFailPrice: false });
     this.setState({ showFailDiscount: false });
-
-    // console.log(new Date().toJSON().slice(0,10).replace(/-/g,'-'));
   };
 
   addImg = () => {
@@ -103,20 +99,19 @@ class CreatItem extends Component {
     }
   };
 
-  renderTitle = () => {
-    if (this.props.creatElem.type === 'add') {
+  renderTitle = (creatElem) => {
+    if (creatElem.type === 'add') {
       return (
         <h3>Add item</h3>
-      )
-    } else {
-      return (
-        <h3>Edit item</h3>
-      )  
+      );
     }
+    return (
+      <h3>Edit item</h3>
+    );
   };
 
-  renderButton = (header, aboutItem, price, percentDiscount, endDateDiscount) => {
-    if (this.props.creatElem.type === 'add') {
+  renderButton = (header, aboutItem, price, percentDiscount, endDateDiscount, creatElem) => {
+    if (creatElem.type === 'add') {
       return (
         <div className="creatItem__button__block">
           <Button
@@ -131,27 +126,27 @@ class CreatItem extends Component {
             add
           </Button>
         </div>
-      )
-    } else {
-      return (
-        <div className="creatItem__button__block">
-            <Button
-              size="small"
-              variant="outlined"
-              disabled={
-                !header
-                || !price
-              }
-              onClick={() => this.editItem(header, aboutItem, price, percentDiscount, endDateDiscount)}
-            >
-              edit
-            </Button>
-          </div>
-        )
+      );
     }
+    return (
+      <div className="creatItem__button__block">
+        <Button
+          size="small"
+          variant="outlined"
+          disabled={
+            !header
+            || !price
+          }
+          onClick={() => this.editItem(header, aboutItem, price, percentDiscount, endDateDiscount)}
+        >
+          edit
+        </Button>
+      </div>
+    );
   };
 
   render() {
+    const { creatElem } = this.props;
     const {
       header,
       aboutItem,
@@ -164,13 +159,10 @@ class CreatItem extends Component {
       showFailDiscount,
       currentDate
     } = this.state;
-    console.log((endDateDiscount < currentDate && percentDiscount !== currentDate));
-    console.log((endDateDiscount < currentDate));
-    console.log((percentDiscount !== currentDate));
 
     return (
       <div className="form__wrap__creatItem">
-        {this.renderTitle()}
+        {this.renderTitle(creatElem)}
         <TextField
           className="creatItem__form"
           label="Заголовок*"
@@ -264,7 +256,7 @@ class CreatItem extends Component {
         >
           Процент скидки не может быть отрицательным числом и дата окончания акции не может быть быть меньше текущей.
         </span>
-        {this.renderButton(header, aboutItem, price, percentDiscount, endDateDiscount)}
+        {this.renderButton(header, aboutItem, price, percentDiscount, endDateDiscount, creatElem)}
         <Link className="link" to="/main__app" />
       </div>
     );

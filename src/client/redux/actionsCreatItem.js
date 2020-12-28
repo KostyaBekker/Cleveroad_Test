@@ -38,7 +38,7 @@ export const actionAddItem = () => {
     aboutItem: '',
     price: '',
     percentDiscount: '',
-    endDateDiscount: new Date().toJSON().slice(0,10).replace(/-/g,'-'),
+    endDateDiscount: new Date().toJSON().slice(0,10).replace(/-/g, '-'),
     type: 'add'
   };
 
@@ -76,14 +76,6 @@ export const actionEditItem = (elem, keyItem) => {
     type: 'edit',
     keyItem
   };
-
-  // firebase.database().ref(`listItem/${keyItem}`).set({
-  //   header: 'name',
-  //   aboutItem: 'email',
-  //   price: 'email',
-  //   percentDiscount: 'email',
-  //   endDateDiscount: 'email'
-  // });
 
   return {
     type: ACTIONEDITITEM,

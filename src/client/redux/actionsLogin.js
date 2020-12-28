@@ -1,11 +1,10 @@
 import * as firebase from 'firebase';
-import { useDispatch } from 'react-redux';
 
 import {
   LOGIN,
 } from './actionTypes';
 
-const login = ( name, password ) => {
+const login = ( name, password, callBack ) => {
 
   // Создание аккаунта пользователя
   // firebase.auth().createUserWithEmailAndPassword(input, password);
@@ -14,7 +13,6 @@ const login = ( name, password ) => {
   return function (dispatch) {
     return firebase.auth().signInWithEmailAndPassword(name, password)
       .then(response => {
-
         // console.log(response)
         const user = {
           name: name,
@@ -22,6 +20,7 @@ const login = ( name, password ) => {
           isValid: true,
           massage: ''
         };
+        callBack();
         dispatch({ type: LOGIN, payload: user })
     })
     .catch((error) => {

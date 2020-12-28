@@ -36,17 +36,15 @@ class Login extends Component {
     this.setState({ ...this.state, showPassword: !this.state.showPassword });
   };
 
-  login = (input, password, massage) => {
-    this.props.login(input, password);
-    if (massage === '') {
+  login = (input, password) => {
+    this.props.login(input, password, () => {
       document.querySelector('.link').click();
-    }
+    });
   };
 
   render() {
     const { user } = this.props;
     const { input, showPassword, password } = this.state;
-    // console.log(user);
     return (
       <div className="form__wrap__login">
         <TextField

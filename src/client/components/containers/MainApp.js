@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
 import { login } from '../../redux/actionsLogin';
-import { listItem } from '../../redux/actionsListItem';
-import { actionAddItem } from '../../redux/actionsCreatItem';
-import { deleteItem } from '../../redux/actionsCreatItem';
-import { actionEditItem } from '../../redux/actionsCreatItem';
+import listItem from '../../redux/actionsListItem';
+import { 
+  actionAddItem,
+  deleteItem,
+  actionEditItem,
+  editItem
+} from '../../redux/actionsCreatItem';
 
 import './main.css';
 
@@ -58,8 +61,7 @@ class Main extends Component {
                 <h1>{renderListItem[item].header}</h1>
                 <span>{renderListItem[item].aboutItem}</span>
                 <span>
-                  Цена: 
-                  {renderListItem[item].price}
+                  Цена: {renderListItem[item].price}$
                 </span>
                 <span
                   style={{
@@ -105,13 +107,12 @@ class Main extends Component {
   };
 
   render() {
-    const { renderListItem } = this.props;
-    console.log(renderListItem);
+    const { renderListItem, user } = this.props;
     return (
       <div>
         <div className="main__header">
           <div className="logo__block">
-            {this.props.user.name}
+            {user.name}
           </div>
           <div>
             <h1>Catalog Items</h1>
@@ -139,5 +140,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login, listItem, deleteItem, actionEditItem, actionAddItem }
+  { login, listItem, deleteItem, editItem, actionAddItem, actionEditItem }
 )(Main);

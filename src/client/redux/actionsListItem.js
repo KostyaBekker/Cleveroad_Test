@@ -1,11 +1,13 @@
 import * as firebase from 'firebase';
+
 import {
   LISTITEM,
 } from './actionTypes';
 
-export const listItem = () => {
+const listItem = () => {
   const db = firebase.database();
   const name = db.ref('listItem');
+  
   return function (dispatch) {
     return name.on('value', (elem) => { 
       const listItem = elem.val();
@@ -13,3 +15,5 @@ export const listItem = () => {
     });
   }
 };
+
+export default listItem;

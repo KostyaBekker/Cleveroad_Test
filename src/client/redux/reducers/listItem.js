@@ -6,9 +6,8 @@ const initialState = [
 export default (state = initialState, action) => {
   switch (action.type) {
     case LISTITEM: {
-      state = action.payload;
       // console.log('reducer', action.payload);
-      return state;
+      return action.payload;
     }
     default:
       return state;
