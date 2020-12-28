@@ -45,10 +45,10 @@
 .main__content__item h1 {
   margin: 3px;
   font-size: 22px;
-  width: 100px;
+  width: 200px;
 }
 .main__content__item span {
-  width: 100px;
+  width: 200px;
 }
 .main__content__item__buttonBlock {
   display: flex;

@@ -4,9 +4,10 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
 import { login } from '../../redux/actionsLogin';
-import { listItem } from '../../redux/actionsCreatItem';
+import { listItem } from '../../redux/actionsListItem';
+import { actionAddItem } from '../../redux/actionsCreatItem';
 import { deleteItem } from '../../redux/actionsCreatItem';
-import { editItem } from '../../redux/actionsCreatItem';
+import { actionEditItem } from '../../redux/actionsCreatItem';
 
 import './main.css';
 
@@ -14,21 +15,21 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: '',
     };
   }
 
+  componentDidMount = () => {
+    this.props.listItem();
+  }
+
   addItem = () => {
+    this.props.actionAddItem();
     document.querySelector('.link').click();
   };
 
   editElem = (item, keyItem) => {
-    this.props.editItem(item, keyItem);
-    // document.querySelector('.link').click();
-  };
-
-  addItem11 = () => {
-    this.props.listItem();
+    this.props.actionEditItem(item, keyItem);
+    document.querySelector('.link').click();
   };
 
   deleteElem = (keyItem) => {
@@ -66,9 +67,7 @@ class Main extends Component {
                     color: 'red'
                   }}
                 >
-                  Скидка: 
-                  {renderListItem[item].percentDiscount}
-                  %
+                  Скидка: {renderListItem[item].percentDiscount}%
                 </span>
                 <span
                   style={{
@@ -76,8 +75,7 @@ class Main extends Component {
                     color: 'red'
                   }}
                 >
-                  До: 
-                  {renderListItem[item].endDateDiscount}
+                  До: {renderListItem[item].endDateDiscount}
                 </span>
                 <div
                   className="main__content__item__buttonBlock"
@@ -111,12 +109,6 @@ class Main extends Component {
     console.log(renderListItem);
     return (
       <div>
-        <Button
-              variant="contained"
-              onClick={() => this.addItem11()}
-            >
-            Add item
-            </Button>
         <div className="main__header">
           <div className="logo__block">
             {this.props.user.name}
@@ -147,5 +139,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login, listItem, deleteItem, editItem }
+  { login, listItem, deleteItem, actionEditItem, actionAddItem }
 )(Main);
