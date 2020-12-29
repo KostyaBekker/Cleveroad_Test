@@ -19,6 +19,7 @@ class CreatItem extends Component {
     super(props);
     this.state = {
       header: this.props.creatElem.header,
+      refPhoto: this.props.creatElem.refPhoto,
       showFailHeader: false,
       aboutItem: this.props.creatElem.aboutItem,
       showFailAboutItem: false,
@@ -64,7 +65,7 @@ class CreatItem extends Component {
       this.setState({ showFailPrice: true });
       isValidPrice = false;
     }
-    if (percentDiscount <= 0 && percentDiscount !== '') {
+    if ((percentDiscount < 10 || percentDiscount > 90) && percentDiscount !== '') {
       this.setState({ showFailDiscount: true });
       isValidDiscount = false;
     }
@@ -77,17 +78,18 @@ class CreatItem extends Component {
     }
   }
 
-  addItem = (header, aboutItem, price, percentDiscount, endDateDiscount) => {
+  addItem = (header, aboutItem, price, percentDiscount, endDateDiscount, refPhoto) => {
     if (this.isValid()) {
-      this.props.addItem(header, aboutItem, price, percentDiscount, endDateDiscount);
+      this.props.addItem(header, aboutItem, price, percentDiscount, endDateDiscount, refPhoto);
       document.querySelector('.link').click();
     }
   };
 
-  editItem = (header, aboutItem, price, percentDiscount, endDateDiscount) => {
+  editItem = (header, aboutItem, price, percentDiscount, endDateDiscount, refPhoto) => {
     if (this.isValid()) {
       const item = {
         header,
+        refPhoto,
         aboutItem,
         price,
         percentDiscount,
@@ -110,7 +112,7 @@ class CreatItem extends Component {
     );
   };
 
-  renderButton = (header, aboutItem, price, percentDiscount, endDateDiscount, creatElem) => {
+  renderButton = (header, aboutItem, price, percentDiscount, endDateDiscount, creatElem, refPhoto) => {
     if (creatElem.type === 'add') {
       return (
         <div className="creatItem__button__block">
@@ -121,7 +123,7 @@ class CreatItem extends Component {
               !header
               || !price
             }
-            onClick={() => this.addItem(header, aboutItem, price, percentDiscount, endDateDiscount)}
+            onClick={() => this.addItem(header, aboutItem, price, percentDiscount, endDateDiscount, refPhoto)}
           >
             add
           </Button>
@@ -137,7 +139,7 @@ class CreatItem extends Component {
             !header
             || !price
           }
-          onClick={() => this.editItem(header, aboutItem, price, percentDiscount, endDateDiscount)}
+          onClick={() => this.editItem(header, aboutItem, price, percentDiscount, endDateDiscount, refPhoto)}
         >
           edit
         </Button>
@@ -157,8 +159,11 @@ class CreatItem extends Component {
       showFailAboutItem,
       showFailPrice,
       showFailDiscount,
-      currentDate
+      currentDate,
+      refPhoto
     } = this.state;
+
+    console.log(refPhoto);
 
     return (
       <div className="form__wrap__creatItem">
@@ -181,17 +186,20 @@ class CreatItem extends Component {
           style={{ display: 'none' }}
           className="inputFile"
         />
-        <Button
-          size="small"
+        <TextField
           className="creatItem__form"
+          value={refPhoto}
+          label="Вставить ссылку на фото"
           variant="outlined"
-          component="label"
-          style={{ display: 'flex', justifyContent: 'start', margin: '5px' }}
-          onClick={() => this.addImg()}
-        >
-          Загрузить фото
-        </Button>
-        {/* <img src="URL" alt="альтернативный текст"> */}
+          size="small"
+          onChange={e => this.hendelChangeSelect('refPhoto', e.target.value)}
+        />
+        <img
+          src={refPhoto} 
+          alt="альтернативный текст"
+          style={{ width: '200px', height: '200px'}}
+          className={refPhoto !== '' ? 'isShowRefPhoto' : 'showRefPhoto'}
+        />
         <TextField
           className="creatItem__form"
           value={aboutItem}
@@ -254,9 +262,9 @@ class CreatItem extends Component {
         <span
           className={showFailDiscount ? 'isValidCreat' : 'validCreat'}
         >
-          Процент скидки не может быть отрицательным числом и дата окончания акции не может быть быть меньше текущей.
+          Процент скидки должно быть от 10% - 90% и дата окончания акции не может быть быть меньше текущей.
         </span>
-        {this.renderButton(header, aboutItem, price, percentDiscount, endDateDiscount, creatElem)}
+        {this.renderButton(header, aboutItem, price, percentDiscount, endDateDiscount, creatElem, refPhoto)}
         <Link className="link" to="/main__app" />
       </div>
     );

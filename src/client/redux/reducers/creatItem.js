@@ -2,6 +2,7 @@ import { ADDITEM, ACTIONADDITEM, DELETEITEM, EDITITEM, ACTIONEDITITEM } from '..
 
 const initialState = {
   header: '',
+  refPhoto: '',
   aboutItem: '',
   price: '',
   percentDiscount: '',

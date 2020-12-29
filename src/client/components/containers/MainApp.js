@@ -54,6 +54,11 @@ class Main extends Component {
               <div
                 className="main__content__photo"
               >
+                <img
+                  src={renderListItem[item].refPhoto}
+                  alt={renderListItem[item].header}
+                  style={{ width: '200px', height: '200px'}}
+                />
               </div>
               <div
                 className="main__content__item"

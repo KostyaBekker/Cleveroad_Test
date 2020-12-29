@@ -3,6 +3,8 @@ import { LOGIN } from '../actionTypes';
 const initialState = {
   name: 'admin@i.ua',
   password: '12345678',
+
+  // Записал данные статично для удобства.
 };
 
 export default (state = initialState, action) => {

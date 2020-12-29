@@ -7,7 +7,7 @@ import {
   EDITITEM,
 } from './actionTypes';
 
-export const addItem = (header, aboutItem, price, percentDiscount, endDateDiscount) => {
+export const addItem = (header, aboutItem, price, percentDiscount, endDateDiscount, refPhoto) => {
 
   const db = firebase.database();
   db.ref('listItem').push({
@@ -15,6 +15,7 @@ export const addItem = (header, aboutItem, price, percentDiscount, endDateDiscou
     aboutItem,
     price,
     percentDiscount,
+    refPhoto,
     endDateDiscount
   });
   const item = {
@@ -23,6 +24,7 @@ export const addItem = (header, aboutItem, price, percentDiscount, endDateDiscou
     price: '',
     percentDiscount: '',
     endDateDiscount: '',
+    refPhoto: '',
     type: 'add'
   };
 
@@ -35,6 +37,7 @@ export const addItem = (header, aboutItem, price, percentDiscount, endDateDiscou
 export const actionAddItem = () => {
   const item = {
     header: '',
+    refPhoto: '',
     aboutItem: '',
     price: '',
     percentDiscount: '',
@@ -52,6 +55,7 @@ export const editItem = (item) => {
 
   firebase.database().ref(`listItem/${item.keyItem}`).set({
     header: item.header,
+    refPhoto: item.refPhoto,
     aboutItem: item.aboutItem,
     price: item.price,
     percentDiscount: item.percentDiscount,
@@ -65,10 +69,10 @@ export const editItem = (item) => {
 };
 
 export const actionEditItem = (elem, keyItem) => {
-
-  console.log('edittem', elem, keyItem);
+  // console.log('edittem', elem, keyItem);
   const item = {
     header: elem.header,
+    refPhoto: elem.refPhoto,
     aboutItem: elem.aboutItem,
     price: elem.price,
     percentDiscount: elem.percentDiscount,

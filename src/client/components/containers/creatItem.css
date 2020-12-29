@@ -32,4 +32,10 @@
 .creatItem__form__price {
   width: 100%;
 }
+.isShowRefPhoto {
+  display: block;
+}
+.showRefPhoto {
+  display: none;
+}
   
